@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi San Valentín?</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #ffe6e6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card {
+            background: white;
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative;
+        }
+
+        .card h1 {
+            font-size: 24px;
+            color: #ff0066;
+        }
+
+        .card .buttons {
+            margin-top: 20px;
+        }
+
+        .card button {
+            background-color: #ff0066;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+
+        .card button:hover {
+            background-color: #cc0052;
+        }
+
+        .images-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .images-container img {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            animation: float 8s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .message {
+            display: none;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #ff0066;
+        }
+
+        .confetti {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 20px;
+            background-color: #ff0066;
+            opacity: 0.8;
+            transform: rotate(15deg);
+            animation: fall 3s linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        .te-amo {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            color: #ff0066;
+            display: none;
+        }
+    </style>
+    <script>
+        function showNoMessages() {
+            const messages = [
+                "¿Estás segura? 💔",
+                "Piénsalo bien... 😢",
+                "Eres muy especial para mí... 💖",
+                "No me rompas el corazón, por favor. 😭"
+            ];
+            const messageBox = document.querySelector('.message');
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            messageBox.textContent = randomMessage;
+            messageBox.style.display = 'block';
+        }
+
+        function showCelebration() {
+            const confettiContainer = document.querySelector('.confetti');
+            const teAmoMessage = document.querySelector('.te-amo');
+
+            for (let i = 0; i < 100; i++) {
+                const confettiPiece = document.createElement('div');
+                confettiPiece.classList.add('confetti-piece');
+                confettiPiece.style.left = Math.random() * 100 + '%';
+                confettiPiece.style.animationDelay = Math.random() * 3 + 's';
+                confettiPiece.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+                confettiContainer.appendChild(confettiPiece);
+            }
+
+            teAmoMessage.style.display = 'block';
+
+            setTimeout(() => {
+                confettiContainer.innerHTML = '';
+                teAmoMessage.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</head>
+<body>
+    <div class="images-container">
+        <img src="image00001.jpeg" style="top: 5%; left: 10%;">
+        <img src="image00002.jpeg" style="top: 20%; right: 10%;">
+        <img src="image00003.jpeg" style="bottom: 20%; left: 15%;">
+        <img src="image00004.jpeg" style="bottom: 10%; right: 5%;">
+    </div>
+    <div class="card">
+        <h1>Antonia, ¿Quieres ser mi San Valentín? 💖</h1>
+        <div class="buttons">
+            <button onclick="showCelebration()">¡Sí! ✨</button>
+            <button onclick="showNoMessages()">No 💔</button>
+        </div>
+        <div class="message"></div>
+    </div>
+    <div class="confetti"></div>
+    <div class="te-amo">¡Te amo! 💕</div>
+</body>
+</html>
